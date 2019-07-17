@@ -1,0 +1,125 @@
+int TrigPin_frente = 11;
+int EchoPin_frente = 10;
+
+int TrigPin_atras = 11;
+int EchoPin_atras  = 10;
+
+int TrigPin_direita = 11;
+int EchoPin_direita = 10;
+
+int TrigPin_esquerda = 11;
+int EchoPin_esquerda = 10;
+
+int distancia_atras = 0;
+int distancia_frente = 0;
+int distancia_direita = 0;
+int distancia_esquerda = 0;
+
+void setup(){
+
+pinMode(TrigPin_frente, OUTPUT);
+pinMode(EchoPin_frente, INPUT);
+
+pinMode(TrigPin_atras, OUTPUT);
+pinMode(EchoPin_atras, INPUT);
+
+pinMode(TrigPin_direita, OUTPUT);
+pinMode(EchoPin_direita, INPUT);
+
+pinMode(TrigPin_esquerda, OUTPUT);
+pinMode(EchoPin_esquerda, INPUT);
+
+}
+
+
+void ultrasonico_frente(boolean mostrar){
+
+  delayMicroseconds(2);
+  digitalWrite(TrigPin_frente, HIGH);
+  delayMicroseconds(13);
+  digitalWrite(TrigPin_frente, LOW);
+  delayMicroseconds(2);
+  
+  long leitura_echo = pulseIn(EchoPin_frente, HIGH, 1000);
+  if(leitura_echo == 0){
+  distancia_frente = 450;
+  }else{
+  distancia_frente = leitura_echo / 58;
+  }
+
+  if(mostrar == true){
+  Serial.print("distancia frente: ");
+  Serial.print(distancia_frente);
+  Serial.println("cm");
+}
+}
+void ultrasonico_atras(boolean mostrar){
+
+  delayMicroseconds(2);
+  digitalWrite(TrigPin_atras, HIGH);
+  delayMicroseconds(13);
+  digitalWrite(TrigPin_atras, LOW);
+  delayMicroseconds(2);
+  
+  long leitura_echo = pulseIn(EchoPin_atras, HIGH, 1000);
+  if(leitura_echo == 0){
+  distancia_atras = 450;
+  }else{
+  distancia_atras = leitura_echo / 58;
+  }
+  
+  if(mostrar == true){
+  Serial.print("distancia atras: ");
+  Serial.print(distancia_atras);
+  Serial.println("cm");
+}
+}
+void ultrasonico_direita(boolean mostrar){
+
+  delayMicroseconds(2);
+  digitalWrite(TrigPin_direita, HIGH);
+  delayMicroseconds(13);
+  digitalWrite(TrigPin_direita, LOW);
+  delayMicroseconds(2);
+  
+  long leitura_echo = pulseIn(EchoPin_direita, HIGH, 1000);
+  if(leitura_echo == 0){
+  distancia_direita = 450;
+  }else{
+  distancia_direita = leitura_echo / 58;
+  }
+  
+  if(mostrar == true){
+  Serial.print("distancia direita: ");
+  Serial.print(distancia_direita);
+  Serial.println("cm");
+}
+}
+void ultrasonico_esquerda(boolean mostrar){
+
+  delayMicroseconds(2);
+  digitalWrite(TrigPin_esquerda, HIGH);
+  delayMicroseconds(13);
+  digitalWrite(TrigPin_esquerda, LOW);
+  delayMicroseconds(2);
+  
+  long leitura_echo = pulseIn(EchoPin_esquerda, HIGH, 1000);
+  if(leitura_echo == 0){
+  distancia_esquerda = 0;
+  }else{
+  distancia_esquerda = leitura_echo / 58;
+  }
+  
+  if(mostrar == true){
+  Serial.print("distancia esquerda: ");
+  Serial.print(distancia_esquerda);
+  Serial.println("cm");
+}
+}
+
+void all_ultra(boolean mostrar){
+ultrasonico_esquerda(mostrar);
+ultrasonico_direita(mostrar);
+ultrasonico_atras(mostrar);
+ultrasonico_frente(mostrar);
+}
